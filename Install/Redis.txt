@@ -1,0 +1,22 @@
+1. Cài đặt redis
+docker run -p 6379:6379 -d redis
+
+Ở đây, mình đang sử dụng latest version của Redis, mình cũng expose port chạy mặc định của Redis là 6379 ra bên ngoài.
+
+kết quả:
+[root@static ~]# docker run -p 6379:6379 -d redis
+f04cbce2d5a82263490cc9eccd127c6fd3212a0f29399651179eae006afff052
+
+2. Kiểm tra redis đã được start chưa
+docker ps -a
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS                      PORTS                               NAMES
+f04cbce2d5a8        redis                   "docker-entrypoint..."   14 seconds ago      Up 11 seconds               0.0.0.0:6379->6379/tcp              jolly_haibt
+
+3. Các bạn có thể access vào container:
+docker exec -it f04cbce2d5a8 sh
+
+4. Sử dụng redis-cli để kiểm tra
+[root@static ~]# docker exec -it f04cbce2d5a8 sh
+# redis-cli  
+127.0.0.1:6379> ping
+PONG
