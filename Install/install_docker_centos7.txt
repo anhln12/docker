@@ -1,0 +1,59 @@
+– Để kiểm tra tính tương thích của kernel Linux và Docker bạn có thể chạy script sau của chính chủ Docker.
+
+# curl https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh > check-config.sh
+# bash ./check-config.sh
+warning: /proc/config.gz does not exist, searching other paths for kernel config ...
+info: reading kernel config from /boot/config-3.10.0-514.el7.x86_64 ...
+ 
+Generally Necessary:
+- cgroup hierarchy: properly mounted [/sys/fs/cgroup]
+- CONFIG_NAMESPACES: enabled
+- CONFIG_NET_NS: enabled
+- CONFIG_PID_NS: enabled
+...
+...
+ 
+Limits:
+- /proc/sys/kernel/keys/root_maxkeys: 1000000
+
+- Cài đặt thư viện và chương trình hỗ trợ.
+yum install -y yum-utils device-mapper-persistent-data lvm2
+
+- Thêm thông tin repository của Docker CE.
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+- Tiến hành cài đặt Docker CE.
+yum install docker-ce -y
+yum install -y docker-ce docker-ce-cli containerd.io
+
+# systemctl start docker
+# systemctl enable docker
+
+- Kiểm tra xem Docker đã hoạt động hay chưa?
+docker run hello-world
+
+docker verison
+docker info
+
+- Gỡ cài đặt Docker trên CentOS 7
+# yum remove docker-ce -y
+# rm -rf /var/lib/docker
+
+
+How to start/stop/restart docker service on CentOS7/RHEL7
+$ sudo systemctl start docker.service ## <-- Start docker ##
+$ sudo systemctl stop docker.service ## <-- Stop docker ##
+$ sudo systemctl restart docker.service ## <-- Restart docker ##
+$ sudo systemctl status docker.service ## <-- Get status of docker ##
+
+
+How to find out info about Docker network bridge and ip address
+ip a list docker0
+
+How to search for docker images
+docker search nginx
+
+How to install Docker nginx image
+docker pull nginx
+
+
