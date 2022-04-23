@@ -11,7 +11,9 @@ docker network ls: Xem các loại network đang có trong docker
 docker inspect { container_id }: Xem chi tiết thông tin của container được tạo ra
 docker network inspect bridge: Xem các ip của container
 docker inspect { container_id || container_name } | grep -C2 Binds: Xem các volume trong container
-docker logs { container_id }: xem lịch sử container  
+docker logs { container_id }: xem lịch sử container
+
+
 2. Xóa 1 container, images:
 docker rm <id hoặc Name>:  Xóa 1 container
 docker rm –f <id hoặc Name>: Giống lệnh trên nhưng xóa được cả container đang chạy (f ó force)
@@ -19,6 +21,8 @@ docker rm $(docker ps -a -q): xóa toàn bộ các container đang tồn tại
 docker kill <id hoặc Name>: Tắt 1 container
 docker rmi <id hoặc Name>: Xóa 1 image
 docker rmi –f <id hoặc Name>: Xóa 1 image kể cả khi đang chạy
+
+
 3. Bật, chạy container
 docker start <id hoặc Name>: Star 1 docker container
 docker stop <id hoặc Name> : Dừng lại container được chỉ định với id hoặc tên đang chạy
