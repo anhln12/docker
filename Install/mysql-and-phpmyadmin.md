@@ -55,6 +55,8 @@ Khởi tạo phpMyAdmin container
 docker run -d --name phpmyadmin --network sql -e PMA_HOST=sql -p 8080:80 phpmyadmin/phpmyadmin
 ```
 Sau khi hoàn thành cài đặt MySQL và phpMyAdmin trên Docker, chúng ta truy cập địa chỉ dạng http://my-ip:8080/
+```
 Start, Stop and restart MySQL Container docker start [container_name] docker stop [container_name] docker restart [container_name]
 Delete MySQL Container docker rm [container_name]
+```
 Thảm khảo: https://phoenixnap.com/kb/mysql-docker-container
