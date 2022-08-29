@@ -22,3 +22,18 @@ Khởi tạo file
 my-custom.cnf
 [mysqld] max_connections=250
 ```
+Khởi tạo MySQL container
+```
+docker run -it -d --name mysql --network sql -e MYSQL_ROOT_PASSWORD="12345" -v /opt/docker/mysql:/var/lib/mysql -v /opt/docker/mysql/conf.d:/etc/mysql/conf.d -p 3306:3306 mysql:8.0.21
+```
+
+```
+Hướng dẫn các tham số: 
+– "docker run": câu lệnh để chạy 1 image và bắt đầu 1 container. Container là một process sử dụng 1 image là nội dung bên trong. 
+– "-it": tham số để cho phép thao tác về sau như can thiệp vào container để thực thi các câu lệnh hệ thống. 
+– "-d": tham số để nói sau khi thực hiện câu lệnh trên thì cho nó chạy background và con trỏ vẫn ở host hiện tại. 
+– "–name mysql": đặt tên cho cái container này. Bởi vì có thể tạo nhiều container từ chung 1 image (đây chính là điểm ưu điểm của Docker), mỗi container cần có cái tên để dễ làm việc, không thì docker sẽ tự tạo 1 cái tên ngẫu nhiên. Và lưu ý, không được phép có 2 container cùng 1 tên. 
+– "-v /opt/mysql:/var/lib/mysql": cho phép mount volume (link thư mục) từ bên trong container ra một thư mục bên ngoài máy đang chạy. Thử tưởng tượng, nếu không sử dụng volume để mapping thư mục, khi container này stop và bị xóa thì toàn bộ dữ liệu trong container cũng bị mất. Do đó, phải mapping ra thư mục bên ngoài để khi container bị xóa thì dữ liệu vẫn còn. Và khi start 1 container mới thì sẽ có dữ liệu trước đó. tham số “-v” là một tham số rất quan trọng Trong ví dụ này thì thư mục “/opt/mysql” là thư mục trên máy và “/var/lib/mysql” là chuỗi cố định được cài đặt sẵn trong image. 
+– "-e MYSQL_ROOT_PASSWORD=12345": Tham số “-e” sẽ set một biến môi trường. Ở đây, set biến môi trường làm password root cho mysql server. Thường mỗi image đều có ghi chú về các biến môi trường và công dụng của nó khi chạy một image. 
+– "mysql:latest": tên image và tag phiên bản của image sẽ chạy.
+```
