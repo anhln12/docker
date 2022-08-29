@@ -37,3 +37,24 @@ Hướng dẫn các tham số:
 – "-e MYSQL_ROOT_PASSWORD=12345": Tham số “-e” sẽ set một biến môi trường. Ở đây, set biến môi trường làm password root cho mysql server. Thường mỗi image đều có ghi chú về các biến môi trường và công dụng của nó khi chạy một image. 
 – "mysql:latest": tên image và tag phiên bản của image sẽ chạy.
 ```
+Truy cập vào MySQL container
+```
+docker exec -it mysql01 mysql -uroot -p
+```
+Kiểm tra cấu hình max_connections
+```
+mysql -uroot -pmypassword -h127.0.0.1 -P6603 -e 'show global variables like "max_connections"';
+```
+Import file .sql vào MySQL container Trong phần lớn trường hợp, sau khi đã có MySQL Server, bạn thường muốn import từ file .sql. Bạn có thể chạy câu lệnh sau để import file sql.
+```
+docker exec -i mysql01 mysql -uroot -p123456 --default-character-set=utf8 DATABASENAME < /data/database.sql
+```
+Thực hiện lần lượt các lệnh sau đây sẽ khởi tạo phpMyAdmin Container trên Docker. Để phpMyAdmin có thể hoạt động chúng ta cần phải liên kết đến vùng chứa MySQL để phpMyAdmin có thể kết nối và truy cập cơ sở dữ liệu.
+Khởi tạo phpMyAdmin container
+```
+docker run -d --name phpmyadmin --network sql -e PMA_HOST=sql -p 8080:80 phpmyadmin/phpmyadmin
+```
+Sau khi hoàn thành cài đặt MySQL và phpMyAdmin trên Docker, chúng ta truy cập địa chỉ dạng http://my-ip:8080/
+Start, Stop and restart MySQL Container docker start [container_name] docker stop [container_name] docker restart [container_name]
+Delete MySQL Container docker rm [container_name]
+Thảm khảo: https://phoenixnap.com/kb/mysql-docker-container
