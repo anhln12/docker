@@ -4,3 +4,8 @@ MySQL Community Edition là phiên bản có thể tải xuống miễn phí c�
 PhpMyAdmin là một công cụ phần mềm miễn phí viết bằng ngôn ngữ PHP nhằm cung cấp một giao diện để quản lý cơ sở dữ liệu MySQL hoặc MariaDB.
 Docker là một nền tảng phần mềm được thiết kế để giúp tạo, triển khai và chạy các ứng dụng dễ dàng hơn.
 ```
+Đầu tiên cúng ta sẽ tạo một Docker Network với tên sql nhằm mục đích khởi chạy Docker Container MySQL và phpMyAdmin trong network:
+```
+docker network create sql
+```
+
