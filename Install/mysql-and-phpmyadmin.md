@@ -8,4 +8,17 @@ Docker là một nền tảng phần mềm được thiết kế để giúp t�
 ```
 docker network create sql
 ```
-
+# Thực hiện lần lượt các lệnh sau đây sẽ khởi tạo MySQL Container trên Docker. Trước tiên, hãy tạo một thư mục dùng để lưu dữ liệu rồi sau đó chạy lệnh khởi tạo MySQL Container:
+Khởi tạo thư mục chứa dữ liệu
+```
+mkdir -p /opt/docker/mysql
+```
+Khởi tạo thư mục chứa file config
+```
+mkdir -p /opt/docker/mysql/conf.d/
+```
+Khởi tạo file
+```
+my-custom.cnf
+[mysqld] max_connections=250
+```
